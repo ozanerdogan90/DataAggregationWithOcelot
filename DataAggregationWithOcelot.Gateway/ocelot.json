@@ -1,0 +1,43 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/restaurants",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/restaurants",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "restaurants"
+    },
+    {
+      "DownstreamPathTemplate": "/reviews",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/reviews",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "reviews"
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "reviews",
+        "restaurants"
+      ],
+      "UpstreamPathTemplate": "/aggregate",
+      "Aggregator": "RestaurantDefinedAggregator"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
